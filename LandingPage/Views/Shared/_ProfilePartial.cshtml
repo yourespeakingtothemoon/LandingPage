@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@model User
+
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    
+    String pageRoute = ViewContext.RouteData.Values["Action"].ToString();
+	var currentuser = UserManager.FindByNameAsync(User.Identity.Name).Result;
+	string mailtolinkStr = "mailto:" + Model.Email;
+
+        <div class="card mb-3 profilecard">
+        <div class="card-body profileheader" style="background-image:url(@Model.CoverPicture);">
+            
+         <h3 class="card-title profileheader-text"> @Model.DisplayName</h3>
+        
+            <a class="mailtolink profileheader-text" href="@mailtolinkStr"> <h4 class=" card-subtitle">@Model.UserName</h4></a>
+            <p class="card-subtitle profileheader-text">@Model.Location</p>
+            
+   </div>
+        <!--<img class="coverImage" src="@currentuser.CoverPicture" />-->
+      <div class="card-body blurbwithimage">
+		<img class="profileImage" src="@Model.ProfilePicture"/>	<p class="card-text bio">@Model.Bio</p>
+            </div>
+
+     
+		@if (Model.IsSelf(currentuser))
+		{
+			
+				<a href="~/Profiles/ProfileEdit" class="btn btn-outline-secondary btn-alltheway">Edit Profile</a>
+            
+        }
+        else
+        {
+            if (currentuser.IsFollowing(Model))
+			{
+			
+
+                <form asp-action="Unfollow" asp-controller="Profiles">
+                    <input type="hidden" name="id" value="@Model.Id"/>
+                    <button type="submit" class="btn btn-primary btn-alltheway">Unfollow</button>
+                </form>
+
+            }
+            else
+            {
+                <form asp-action="Follow" asp-controller="Profiles">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary btn-alltheway">Follow</button>
+                </form>
+
+
+            }
+       
+      
+        }
+         <ul class="list-group list-group-flush">
+      @foreach(Link l in Model.Links)
+            {
+                string url1 = "https://www.google.com/s2/favicons?domain=" + l.URL;
+                <li class="list-group-item">
+                <a href="@l.URL"><img src="@url1">@l.URL</a>
+                </li>
+            }
+        </ul>
+        @if (!pageRoute.Contains("Profile"))
+        {
+            
+
+                <a href="~/user/@Model.Id" class="btn btn-outline-primary btn-alltheway">
+                    See Full Profile
+                </a>
+           
+        }
+        
+        <div class="card-footer">
+            <center>
+            @Model.Id
+            </center>
+        </div>
+    
+        </div>
+}
+else{}

@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@model User
+@{
+	//var author = UserManager.FindByIdAsync(Model.fromUserId).Result;
+	//var recipient = UserManager.FindByIdAsync(Model.toUserId).Result;
+}
+
+
+<div class="card border-info mb-3">
+	<div class="card-header">
+		Send A Message To @Model.DisplayName
+	</div>
+<div class="card-body">
+	<form asp-action="SendMessage" asp-controller="Home" id="mesForm">
+			<div class="form-group">
+			
+				<textarea class="form-control-plaintext" id="mess" name="message" rows="3" placeholder="type your message to @Model.UserName here"></textarea>
+				<input type="hidden" name="toid" value="@Model.Id" />
+				<input type="hidden" name="fromid" value="@UserManager.GetUserId(User)" />
+				<div class="form-check form-switch">
+					<input class="form-check-input" type="checkbox" id="pubCheck"name="isPublic" checked="" onclick="privatePublic()">
+					<label class="form-check-label text-warning" id="pubLabel">This message is public.</label>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Send</button>
+	</form>
+</div>
+</div>
+
+<script>
+	var pubbox = document.getElementById("pubCheck");
+	// Get the output text
+	var lbl = document.getElementById("pubLabel");
+	if (pubbox.checked == true) {
+		
+			lbl.innerHTML = "This message is public.";
+		} else {
+		
+			lbl.innerHTML = "This message is private.";
+		}
+
+	function privatePublic() {
+	
+
+
+		// If the checkbox is checked, display the output text
+		if (pubbox.checked == true) {
+		
+			lbl.innerHTML = "This message is public.";
+		} else {
+		
+			lbl.innerHTML = "This message is private.";
+		}
+	}
+
+</script>

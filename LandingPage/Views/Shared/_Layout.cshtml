@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LandingPage</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LandingPage.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-nav container-fluid">
+  
+                <a class="logoLink" asp-area="" asp-controller="Home" asp-action="Index"><img class="headerLogo" src="~/img/logo.svg" /></a>
+                
+
+
+            <div class=" justify-content-end">
+                    <partial name="_LoginPartial" class=" " />
+                    </div>
+
+          </div>
+        </nav>
+ </header>
+    <div class="container">
+        <hr/>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <button onclick="topFunction()" id="toTop" title="Go to top">
+		
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z" />
+        </svg>Back to Top
+    </button>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - LandingPage - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> · <a asp-area="" asp-controller="Home" asp-action="About">Learn More</a>
+        </div>
+    </footer>
+    <script>
+        // Get the button:
+        let mybutton = document.getElementById("toTop");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

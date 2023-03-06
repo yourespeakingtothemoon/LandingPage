@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@model LandingPage.Models.User
+@{
+    ViewData["Title"] = Model.DisplayName + "'s Page";
+    var currentUser = UserManager.FindByEmailAsync(User.Identity.Name).Result;
+
+}
+
+    <div class="container">
+        <div class="row">
+    <div class="col homepagecol profileright">
+        <partial class="profilepartial" name="_ProfilePartial" for="@Model" />
+    </div>
+    
+            <div class="col">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#posts" aria-selected="true" role="tab" tabindex="-1">Posts</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#photos" aria-selected="false" role="tab">Photos</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" href="#messages" aria-selected="false" role="tab" tabindex="-1">Messages</a>
+                    </li>
+
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active show" id="posts" role="tabpanel">
+
+
+
+                        @if (currentUser.Id == Model.Id)
+                        {
+                            <br />
+                        <partial name="_PostBuilderPartial"/>
+
+                            <hr />
+                        }
+                        else { }
+
+                        <h5 class="text-center">Posts by @Model.DisplayName</h5>
+                        <hr/>
+                        
+                        @foreach (Post post in Model.Posts)
+                        {
+                            <partial name="_PostPartial" for="@post" />
+                        }
+
+
+
+                    </div>
+                    <div class="tab-pane fade" id="photos" role="tabpanel">
+                        <hr/>
+						<h5 class="text-center">Photos by @Model.DisplayName</h5>
+                        <hr/>
+                         @foreach (Photo photo in Model.Photos)
+                        {
+                            <partial name="_PhotoPartial" for="@photo" />
+                        }
+                </div>
+					<div class="tab-pane fade" id="messages" role="tabpanel">
+                        <br/>
+						<partial name="_MessageSendPartial" for="@Model"/>
+						<hr />
+                        <h5 class="text-center">Public Messages sent to @Model.DisplayName</h5>
+                       <hr/>
+						@foreach (Message message in ViewBag.MessageList)
+						{
+                            if (currentUser.IsSelf(Model))
+                            {
+                                <partial name="_MessagePartial" for="@message" />
+                            }
+                            else
+                            {
+                                if (message.isPublic = true)
+                                {
+                                    <partial name="_MessagePartial" for="@message" />
+                                }
+                            }
+                               
+                        }
+					</div>
+            </div>
+
+        </div>
+    </div>

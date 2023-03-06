@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@model Photo
+
+
+<div class="card border-info mb-3">
+	
+
+		<img class="card-img-top" src="@Model.url" alt="Card image cap">
+		<a href="@Model.url" class="btn btn-outline-secondary btn-alltheway" download>Download this Photo</a>
+
+</div>

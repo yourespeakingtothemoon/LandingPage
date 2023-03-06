@@ -1,0 +1,15 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirm email";
+}
+
+<h1>@ViewData["Title"]</h1>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<p>
+	Thanks for confirming your email @Model.currentUser.Email<br/>
+	Oh, my goodness, I am addressing you by your email address. I am so sorry.<br />
+	You need to set up a profile, this is all optional, of course, but is highly recommended.</br>
+	You can do this by clicking the button below.</p>
+<a class="btn btn-lg btn-outline-info btn-lrgst" type="button" asp-controller="Home" asp-action="ProfileEdit">Set up profile</a>
+	

@@ -1,0 +1,20 @@
+﻿@model List<LandingPage.Models.User>
+
+@{
+	ViewData["Title"] = "Search for '"+ViewBag.filter+"'";
+	
+}
+<h3>Users Matching ' @ViewBag.filter '</h3>
+<hr/>
+<div class="searchgrid">
+	
+	
+@foreach (User user in Model)
+{
+		
+			<partial  name="_ProfilePartial" for="@user" />
+			
+	
+	}
+	
+		</div>

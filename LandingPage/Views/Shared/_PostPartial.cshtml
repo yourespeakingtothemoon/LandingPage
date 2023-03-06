@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@model Post
+
+
+@{
+	var author = UserManager.FindByIdAsync(Model.AppUserId).Result;
+	}
+<div class="card border-primary mb-3">
+	
+	<div class="card-header d-inline-flex">
+			<div class="dropright justify-content-start">
+				<a class="" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					<img class="author-pfp" src="@author.ProfilePicture">
+				</a>
+				<div class="dropdown-menu">
+					<partial class= name="_ProfilePartialLittle" for="@author"/>
+				</div>
+			</div>
+			
+    @if(Model.Title!=null){
+  
+	  <div class="justify-content-center">
+	  @Model.Title
+	  </div>
+    }
+    else{}
+
+</div>
+	
+	@if (Model.Image != null)
+	{
+		<img class="card-img-top" src="@Model.Image.url" alt="Card image cap">
+	}
+	else
+	{
+	}
+	
+
+    @if(Model.Content!=null){
+
+		@if (Model.IsRaw)
+		{
+		<div class="embed-post">	@Html.Raw(Model.Content)
+			</div>
+		}
+		else
+		{
+			<div class="card-body">@Model.Content</div>
+		}
+
+    }else{}
+<div class="card-footer">
+		posted on @Model.DatePosted.ToLongDateString()
+		</div>
+</div>

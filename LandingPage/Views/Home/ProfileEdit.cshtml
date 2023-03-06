@@ -1,0 +1,334 @@
+﻿@model LandingPage.Models.User;
+@if (Model.DisplayName==null)
+{
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4 class="alert-heading">STOP RIGHT THERE!</h4>
+        <p class="mb-0">You need to set up your profile before you can use the rest of LandingPage!.</p>
+    </div>
+}
+else{}
+<ul class="nav nav-tabs" role="tablist">
+
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" data-bs-toggle="tab" href="#profile" aria-selected="true" role="tab">Edit Profile Info</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" href="#covpfp" aria-selected="false" role="tab">Cover and Profile Pictures</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" data-bs-toggle="tab" href="#links" aria-selected="false" role="tab">Add/Remove Links</a>
+    </li>
+    
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active show" id="profile" role="tabpanel">
+        <div>
+        <form method="post" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+              
+                <div class="form-group">
+                    <label asp-for="DisplayName" class="control-label"></label>
+                    <input asp-for="DisplayName" name="disname" class="form-control-plaintext" />
+                    <span asp-validation-for="DisplayName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    
+                        <label asp-for="Bio" class="control-label"></label>
+                        <input asp-for="Bio" name="bio" class="form-control-plaintext" />
+                        <span asp-validation-for="Bio" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    
+                        <label asp-for="Location" class="control-label"></label>
+                        <input asp-for="Location" name="location" class="form-control-plaintext" />
+                        <span asp-validation-for="Location" class="text-danger"/>
+                </div>
+           <div class="form-group">
+                <input type="submit" value="Save Changes" class="btn btn-info" />
+            </div> 
+           
+        </form>
+        </div>
+   </div>
+   
+   <div class=" tab-pane fade" id="covpfp" role="tabpanel">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+    <h2 class="" id="headingOne">
+                    <button class="accordion-button btn-strch " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                       Profile Picture
+                    </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/def1.png">
+                                <input type="hidden" value="/img/profile/def1.png" name="pfp"/>
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                           
+                            
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/def2.png">
+                                <input type="hidden" value="/img/profile/def2.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/def3.png">
+                                <input type="hidden" value="/img/profile/def3.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/def4.png">
+                                <input type="hidden" value="/img/profile/def4.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/art1.png">
+                                <input type="hidden" value="/img/profile/art1.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/art2.png">
+                                <input type="hidden" value="~/img/profile/art2.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/art3.png">
+                                <input type="hidden" value="/img/profile/art3.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/drachen.png">
+                                <input type="hidden" value="/img/profile/drachen.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/drachen2.png">
+                                <input type="hidden" value="/img/profile/drachen2.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/drachen3.png">
+                                <input type="hidden" value="/img/profile/drachen3.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/spooky1.png">
+                                <input type="hidden" value="/img/profile/spooky1.png" name="pfp" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/spooky2.png">
+                                <input type="hidden" value="/img/profile/spooky2.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/spooky3.png">
+                                <input type="hidden" value="/img/profile/spooky3.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/starchild1.png">
+                                <input type="hidden" value="/img/profile/starchild1.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/starchild2.png">
+                                <input type="hidden" value="/img/profile/starchild2.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                    <div class="col">
+                            <form asp-controller="Home" asp-action="ChangePFP">
+                                <img class="pfp-select" src="/img/profile/starchild3.png">
+                                <input type="hidden" value="/img/profile/starchild3.png" name="pfp" />
+                                <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                            </form>
+                                    </div>
+                                </div>
+                            
+                              
+                                </div>
+                                </div>
+                                   <form method="post" class="d-flex" asp-action="ChangePFP">
+                            <input class="form-control-plaintext" type="text" name="pfp" placeholder="full url of image (including http)" />
+                                       <input class="btn btn-outline-light" type="submit" value="Change Profile Pic"/>
+                                   </form>
+</div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button btn-strch " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">
+                        Cover Image
+                   </button>
+                   </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col">
+                                <form asp-controller="Home" asp-action="ChangeCOV">
+                                    <img class="cov-select" src="/img/profile/cover/def1.png">
+                                    <input type="hidden" value="/img/profile/cover/def1.png" name="cov" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                                </form>
+
+                            </div>
+                            <div class="col">
+                                <form asp-controller="Home" asp-action="ChangeCOV">
+                                    <img class="cov-select" src="/img/profile/cover/def2.png">
+                                    <input type="hidden" value="/img/profile/cover/def2.png" name="cov" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                                </form>
+
+                            </div>
+                            <div class="col">
+                                <form asp-controller="Home" asp-action="ChangeCOV">
+                                    <img class="cov-select" src="/img/profile/cover/def3.png">
+                                    <input type="hidden" value="/img/profile/cover/def3.png" name="cov" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                                </form>
+
+                            </div>
+                                </div>
+                                <div class="row">
+
+                            <div class="col">
+                                <form asp-controller="Home" asp-action="ChangeCOV">
+                                    <img class="cov-select" src="/img/profile/cover/lake.jpg">
+                                    <input type="hidden" value="/img/profile/cover/lake.png" name="cov" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                                </form>
+
+                            </div>
+                            <div class="col">
+                                <form asp-controller="Home" asp-action="ChangeCOV">
+                                    <img class="cov-select" src="/img/profile/cover/neon.jpg">
+                                    <input type="hidden" value="/img/profile/cover/neon.png" name="cov" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                                </form>
+
+                            </div>
+                            <div class="col">
+                                <form asp-controller="Home" asp-action="ChangeCOV">
+                                    <img class="cov-select" src="/img/profile/cover/story1.png">
+                                    <input type="hidden" value="/img/profile/cover/story1.png" name="cov" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                                </form>
+
+                            </div>
+
+                                </div>
+                                <div class="row">
+
+                            <div class="col">
+                                <form asp-controller="Home" asp-action="ChangeCOV">
+                                    <img class="cov-select" src="/img/profile/cover/story2.png">
+                                    <input type="hidden" value="/img/profile/cover/story2.png" name="cov" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                                </form>
+
+                            </div>
+                                    <div class="col">
+                                <form asp-controller="Home" asp-action="ChangeCOV">
+                                    <img class="cov-select" src="/img/profile/cover/Trangl.png">
+                                    <input type="hidden" value="/img/profile/cover/Trangl.png" name="cov" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                                </form>
+                                
+                            </div>
+                            <div class="col">
+                                <form asp-controller="Home" asp-action="ChangeCOV">
+                                    <img class="cov-select" src="/img/profile/cover/Tranglglitch.png">
+                                    <input type="hidden" value="/img/profile/cover/Tranglglitch.png" name="cov" />
+                                    <input class="btn btn-outline-light align-self-center" type="submit" value="Use this image" />
+                                </form>
+
+                            </div>
+
+                                </div>
+                                </div>
+                                </div>
+                                <div>
+                            <form method="post" class="d-flex" asp-action="ChangeCOV">
+                                <input class="form-control-plaintext" type="text" name="cov" placeholder="full url of image (including http)" />
+                                <input class="btn btn-outline-light" type="submit" value="Change Cover Pic" />
+                            </form>
+                                </div>
+      </div>
+   </div>
+</div>
+    <div class="tab-pane fade" id="links" role="tabpanel">
+        @{
+            
+                foreach (Link l in @Model.Links)
+                {
+                string url1 = "https://www.google.com/s2/favicons?domain=" + l.URL;
+
+                    <a href="@l.URL"><img src="@url1">@l.URL</a>
+				<form asp-action="RemoveLink">
+                <input type="hidden" value="@l.Id" name="l"/>
+                    <input class="btn-danger btn-wide-short" type="submit" value="Remove"/>
+            </form>
+                }
+           
+            }
+            <hr />
+			<h3>Add a Link</h3>
+            <form asp-action="AddLink" class="form-row btn-lrgst" method="post">
+			<input type="text" name="URL" placeholder="Full URL of Link" />
+			
+            <input type="submit" class="btn-primary" value="Add Link" />
+            </form>
+    </div>
+ 
+</div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+<script type="text/javascript" src="https://weblabormx.github.io/Imgur-JS-Uploader/imgur-js-uploader.js"></script><!-- normal one -->
+<script type="text/javascript" src="https://weblabormx.github.io/Imgur-JS-Uploader/imgur-js-uploader.min.js"></script><!-- minify one -->
+}
+

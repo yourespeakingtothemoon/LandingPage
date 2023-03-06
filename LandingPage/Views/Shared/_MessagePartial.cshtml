@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@model Message
+@{
+	var author = UserManager.FindByIdAsync(Model.fromUserID).Result;
+	var recipient = UserManager.FindByIdAsync(Model.toUserID).Result;
+}
+
+
+<div class="card border-info mb-3">
+	<div class="card-header">
+		From
+		
+	<div class="nav-item dropleft">
+				<a class="nav-link" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					<img class="author-pfp" src="@author.ProfilePicture">
+				</a>
+				<div class="dropdown-menu">
+					<partial class= name="_ProfilePartialLittle" for="@author"/>
+				</div>
+			</div>
+		</div>
+	<div class="card-body">
+		<p>@Model.m_Message</p>
+	</div>
+	<div class="card-footer">
+		To
+		<div class="nav-item dropup">
+			<a class="nav-link" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+					<img class="author-pfp" src="@recipient.ProfilePicture">
+				</a>
+				<div class="dropdown-menu">
+					<partial class= name="_ProfilePartialLittle" for="@recipient"/>
+				</div>
+			</div>
+		</div>
+</div>

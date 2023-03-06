@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@model LandingPage.Data.LPDAL
+@{
+    ViewData["Title"] = "Home Page";
+    var currentUser = UserManager.FindByEmailAsync(User.Identity.Name).Result;
+    List<Post> folPost = Model.GetFollowingPosts(currentUser).Result;
+}
+
+<div class="container">
+    <div class="row">
+       <div class="col">
+
+    
+       <partial name="_PostBuilderPartial"/>
+
+<hr/>
+            @foreach (Post post in folPost)
+            {
+                        <partial name="_PostPartial" for="@post"/>
+            } 
+
+
+    
+        </div>
+        
+
+
+        <div class="col homepagecol profileright">
+            <partial class="profilepartial" name="_ProfilePartial" for="@currentUser" />
+</div>
+    </div>
+</div>
+

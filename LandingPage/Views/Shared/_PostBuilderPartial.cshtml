@@ -1,0 +1,44 @@
+﻿<div class="card border-secondary">
+
+    <div class="card-body">
+
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#regpost" aria-selected="false" role="tab" tabindex="-1">Standard Post</a>
+            </li>
+
+
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-bs-toggle="tab" href="#htmlpost" aria-selected="false" role="tab">HTML Post Mode</a>
+            </li>
+
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade" id="regpost" role="tabpanel">
+                <form asp-action="NewPost" asp-controller="Home">
+                    <input type="text" class="form-control-plaintext" name="title" placeholder="Give your post a title" />
+                    <textarea type="text" class="form-control-plaintext " name="content" rows="4" placeholder="type your post!"></textarea>
+                    <input type="text" class="form-control-plaintext" name="photo" placeholder="If you would like to add a photo paste a URL here!" />
+
+                    <input type="submit" value="Create" class="btn btn-primary btn-alltheway" />
+
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="htmlpost" role="tabpanel">
+                <form asp-action="NewRawPost" asp-controller="Home">
+                    <input type="text" class="form-control-plaintext" name="title" placeholder="Give your post a title" />
+                    <textarea type="text" class="form-control-plaintext " name="content" rows="5" placeholder="type your html code!"></textarea>
+
+
+                    <input type="submit" value="Create" class="btn btn-primary btn-alltheway" />
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

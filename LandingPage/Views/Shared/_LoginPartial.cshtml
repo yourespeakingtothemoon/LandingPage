@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    
+        <div class=" dropleft">
+            
+            
+                <a class="" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="@UserManager.FindByEmailAsync(User.Identity.Name).Result.ProfilePicture" class="dropdown-pfp" />
+                </a>
+                <div class="dropdown-menu">
+
+            <a class="dropdown-item" href="~/user/@UserManager.FindByNameAsync(User.Identity.Name).Result.Id">@UserManager.FindByNameAsync(User.Identity.Name).Result.DisplayName</a>
+
+                    <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="~/c/@UserManager.FindByNameAsync(User.Identity.Name).Result.Id">@UserManager.FindByNameAsync(User.Identity.Name).Result.DisplayName's Card</a>
+                    <form class="dropdown-item form-inline btn-alltheway" asp-controller="Profiles" asp-action="SearchRoute" href="#">
+						<input class="form-control plaintext" name="filter" type="search" placeholder="Search Users" aria-label="Search" />
+						<button class="btn btn-secondary" type="submit">Search</button>
+                    </form>
+                    <a class="dropdown-item" asp-controller="Home" asp-action="ProfileEdit" >Edit Profile</a>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" >Account Settings</a>
+                    <div class="dropdown-divider"></div>
+                   <center>
+                        <form class="dropdown-item form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link btn-danger btn-alltheway">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                        </svg> Logout</button>
+                        </form>
+                        </center>
+                </div>
+            
+        
+  
+    </div>
+  
+}
+else
+{
+   <div class="btn-group">
+            <button class="btn btn-link nav-link btn-outline-info">
+        <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                      </button>
+    
+      <button class="btn btn-link nav-link btn-outline-success">
+        <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+               </button>
+   </div>
+}
+
