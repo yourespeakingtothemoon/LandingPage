@@ -49,7 +49,16 @@ namespace LandingPage.Controllers
 			//get a list of posts from users followed by user
 			//var followingPosts = _lpdal.GetFollowingPosts(user).Result;
 			user.UserLoad(_lpdal);
-			return View(_lpdal);
+
+            var usrs = _lpdal.GetUsers().Result;
+			var posts = _lpdal.GetPosts().Result;
+            //loop to use the UserLoad method on each user in the list
+            foreach (var u in usrs)
+            {
+				u.UserLoad(_lpdal);
+            }
+			
+            return View(_lpdal);
 
 
 			

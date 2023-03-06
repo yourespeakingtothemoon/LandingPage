@@ -2,7 +2,19 @@
 @model ID6NP.Areas.Admin.Pages.Roles.CreateModel
 @{
 }
+	@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
+   @if (SignInManager.IsSignedIn(User))
+{
+
+    var currentUser = UserManager.FindByEmailAsync(User.Identity.Name).Result;
+    //find if current user tied to admin role
+	var adminRole = UserManager.GetRolesAsync(currentUser).Result;
+    
+
+
+@if(adminRole.Contains("Admin")){
 <h1>Create Role</h1>
 
 <div class="row">
@@ -18,3 +30,15 @@
         </form>
     </div>
 </div>
+}
+    else
+    {
+                <partial name="_unauthorizedPartial"/>
+    }
+}
+else
+{
+        <partial name="_unauthorizedPartial" />
+}
+
+

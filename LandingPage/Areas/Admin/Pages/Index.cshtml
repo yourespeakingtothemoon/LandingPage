@@ -2,7 +2,20 @@
 @model ID6NP.Areas.Admin.Pages.IndexModel
 @{
 }
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
+}
+   @if (SignInManager.IsSignedIn(User))
+{
 
+    var currentUser = UserManager.FindByEmailAsync(User.Identity.Name).Result;
+    //find if current user tied to admin role
+	var adminRole = UserManager.GetRolesAsync(currentUser).Result;
+    
+
+
+@if(adminRole.Count > 0){
 <h3>Administrators</h3>
 
 <a asp-area="Admin" asp-page="/Roles/Index">Roles</a>
@@ -16,3 +29,13 @@
         </ul>
     </div>
 </div>*@
+}
+    else
+    {
+        <partial name="_unauthorizedPartial" />
+    }
+}
+else
+{
+	<partial name="_unauthorizedPartial" />
+}

@@ -1,8 +1,19 @@
 ﻿@page
 @model ID6NP.Areas.Admin.Pages.Roles.IndexModel
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @{
 }
+   @if (SignInManager.IsSignedIn(User))
+{
 
+    var currentUser = UserManager.FindByEmailAsync(User.Identity.Name).Result;
+    //find if current user tied to admin role
+	var adminRole = UserManager.GetRolesAsync(currentUser).Result;
+    
+
+
+@if(adminRole.Contains("Admin")){
 <div class="row">
     <div class="col-sm-6">
         <h1>Current Roles</h1>
@@ -40,3 +51,15 @@ else
 {
     <h3>No roles in database</h3>
 }
+}
+    else
+    {
+        <partial name="_unauthorizedPartial" />
+    }
+}
+else
+{
+    <partial name="_unauthorizedPartial" />
+}
+
+

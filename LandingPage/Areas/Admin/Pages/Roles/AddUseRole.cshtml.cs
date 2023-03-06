@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using LandingPage.Models;
 
 namespace ID6NP.Areas.Admin.Pages.Roles
 {
@@ -15,10 +16,10 @@ namespace ID6NP.Areas.Admin.Pages.Roles
     public class AddUseRoleModel : PageModel
     {
         private RoleManager<IdentityRole> RoleManager { get; set; }
-        private UserManager<IdentityUser> UserManager { get; }
+        private UserManager<User> UserManager { get; }
 
         public AddUseRoleModel(RoleManager<IdentityRole> roleManager, 
-            UserManager<IdentityUser> userManager)
+            UserManager<User> userManager)
         {
             RoleManager = roleManager;
             UserManager = userManager;
@@ -53,7 +54,7 @@ namespace ID6NP.Areas.Admin.Pages.Roles
                 return Page();
             }
 
-            IdentityUser user = UserManager.Users.FirstOrDefault(u => u.Id == SelectedUserId);
+            User user = UserManager.Users.FirstOrDefault(u => u.Id == SelectedUserId);
             if(user != null)
             {
                 IdentityResult result = await UserManager.AddToRoleAsync(user, SelectedRole);
